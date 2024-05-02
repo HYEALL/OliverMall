@@ -29,6 +29,8 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JPanel panel_top_btn = new JPanel();
 	JPanel panel_menu = new JPanel();
 	JPanel panel_item = new JPanel();
+	JPanel panel_item_image = new JPanel();
+	JPanel panel_item_content = new JPanel();
 	JButton[] categoryButtons = new JButton[4];
 	JButton btn_home = new JButton("Home");
 	String[] categoryStr = {"Skin", "Point", "Base", "Sun"};
@@ -96,19 +98,36 @@ public class HomeFrame extends JFrame implements ActionListener {
 			categoryButtons[i].setContentAreaFilled(false);
 	        panel_menu.add(categoryButtons[i]);
 		}
+		panel_item.setLayout(new BorderLayout());
+		panel_item.add("West", panel_item_image);
+		panel_item.add("Center", panel_item_content);
 		
-		panel_item.setLayout(new GridLayout(10, 2));
-		panel_item.setBackground(Color.WHITE);
-		panel_item.add(suncare);
-		panel_item.add(label_suncare);
-		panel_item.add(suncare2);
-		panel_item.add(label_suncare2);
-		panel_item.add(suncare3);
-		panel_item.add(label_suncare3);
-		panel_item.add(suncare4);
-		panel_item.add(label_suncare4);
-		panel_item.add(suncare5);
-		panel_item.add(label_suncare5);
+		// image에 상품 사진, label에 가격정보 가져오기
+		panel_item_image.setLayout(new GridLayout(10, 1));
+		panel_item_image.setBackground(Color.WHITE);
+		panel_item_image.add(suncare);
+		suncare.setBorderPainted(false);
+		suncare.setContentAreaFilled(false);
+		panel_item_image.add(suncare2);
+		suncare2.setBorderPainted(false);
+		suncare2.setContentAreaFilled(false);
+		panel_item_image.add(suncare3);
+		suncare3.setBorderPainted(false);
+		suncare3.setContentAreaFilled(false);
+		panel_item_image.add(suncare4);
+		suncare4.setBorderPainted(false);
+		suncare4.setContentAreaFilled(false);
+		panel_item_image.add(suncare5);
+		suncare5.setBorderPainted(false);
+		suncare5.setContentAreaFilled(false);
+		panel_item_content.setLayout(new GridLayout(10, 1));
+		panel_item_content.setBackground(Color.WHITE);
+		panel_item_content.add(label_suncare);
+		panel_item_content.add(label_suncare2);
+		panel_item_content.add(label_suncare3);
+		panel_item_content.add(label_suncare4);
+		panel_item_content.add(label_suncare5);
+		
 	}
 
 	private void start() {
