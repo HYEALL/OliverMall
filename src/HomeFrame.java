@@ -102,7 +102,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_item.add("West", panel_item_image);
 		panel_item.add("Center", panel_item_content);
 		
-		// image에 상품 사진, label에 가격정보 가져오기
+		// button에 상품 사진, label에 가격정보 가져오기
 		panel_item_image.setLayout(new GridLayout(10, 1));
 		panel_item_image.setBackground(Color.WHITE);
 		panel_item_image.add(suncare);
