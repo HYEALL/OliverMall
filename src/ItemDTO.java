@@ -27,7 +27,7 @@ public class ItemDTO {
 	@Override
 	public String toString() {
 		String str = "";
-		str = String.format("%s    %s원", name, cost);
+		str = String.format("\n\n\n%s\n정가: %s\n판매가: %s", name, cost, sale);
 		return str;
 	}
 

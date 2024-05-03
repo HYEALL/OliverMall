@@ -8,11 +8,10 @@ public class ItemController implements Item{
 		String result = "";
 		for(int i=0; i<list.size(); i++) {
 			ItemDTO dto = list.get(i);
-			result += dto.toString() + "\n";
+			result += dto.toString() + "\t";
 		}
 		return result;
 	}
-
 	@Override
 	public String searchName(String name) {
 		// TODO Auto-generated method stub

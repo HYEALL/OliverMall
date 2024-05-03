@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class HomeFrame extends JFrame implements ActionListener {
@@ -33,6 +35,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JPanel panel_item = new JPanel();
 	JPanel panel_item_image = new JPanel();
 	JPanel panel_item_content = new JPanel();
+
 	JButton[] categoryButtons = new JButton[4];
 	JButton btn_home = new JButton("Home");
 	String[] categoryStr = { "Skin", "Point", "Base", "Sun" };
@@ -43,11 +46,14 @@ public class HomeFrame extends JFrame implements ActionListener {
 	
 	// 상품 read
 	String str = controller.read();
-	String[] item_str = str.split("\n");
+	String[] item_strs = str.split("\t");
+	int size = item_strs.length;
+	JTextArea[] item_textAreas = new JTextArea[size];
+	JScrollPane[] item_scrollPane = new JScrollPane[size];
+	JButton[] item_btns = new JButton[size];
+	JPanel[] panel_items = new JPanel[size];
 
-	JButton[] item_btns = new JButton[item_str.length];
-	JLabel [] item_labels = new JLabel[item_str.length];
-	
+
 	public HomeFrame() {
 		// Frame 기본설정
 		setSize(400, 700);
@@ -106,22 +112,29 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_item.add("West", panel_item_image);
 		panel_item.add("Center", panel_item_content);
 
-		panel_item_image.setLayout(new GridLayout(item_str.length, 1));
+		panel_item_image.setLayout(new GridLayout(size, 1, 0, 10));
 		panel_item_image.setBackground(Color.WHITE);
 
-		for (int i = 0; i < item_str.length; i++) {
+		for (int i = 0; i < size; i++) {
 			item_btns[i] = new JButton(new ImageIcon("img/"+(i+1)+".png"));;
 			item_btns[i].setBorderPainted(false);
 			item_btns[i].setContentAreaFilled(false);
 			panel_item_image.add(item_btns[i]);
 		}
-		panel_item_content.setLayout(new GridLayout(item_str.length, 1));
+
+		panel_item_content.setLayout(new GridLayout(size, 1, 0, 10));
 		panel_item_content.setBackground(Color.WHITE);
-		for (int i = 0; i < item_str.length; i++) {
-			item_labels[i] = new JLabel(item_str[i]);
-			item_labels[i].setFont(new Font("굴림", Font.PLAIN, 12));
-			panel_item_content.add(item_labels[i]);
+		for (int i = 0; i < size; i++) {
+			item_textAreas[i] = new JTextArea(item_strs[i]);
+			item_textAreas[i].setEditable(false);
+			item_textAreas[i].setFont(new Font("돋움", Font.BOLD, 15));
+			item_textAreas[i].setBorder(null);
+			panel_item_content.add(item_textAreas[i]);
+			
 		}
+		
+
+		
 
 
 
