@@ -17,7 +17,7 @@ CREATE TABLE item (
     profit NUMBER(7) DEFAULT 0,        -- 이익
     discount NUMBER(7) DEFAULT 0,      -- 할인
     -- 상품 카테고리
-    kind CHAR(1)                       -- 상품 종류(가방 : 1, 옷 : 2, 신발 : 3)
+    kind CHAR(1)                       --  상품 종류(1: 스킨케어, 2:포인트메이크업, 3: 베이스메이크업, 4: 선케어)
 );
 
 -- order(주문) 테이블
@@ -55,5 +55,12 @@ create table admin (
   adminid varchar2(20) primary key,
   password varchar2(20) not null
 );
+delete item where itemno = 2;
+insert into item values (1, '식물나라 수분 선크림', 10000, 9000, 500, 1000, 4);
+insert into item values (2, '닥터지 수분 수딩 크림', 11000, 9000, 1000, 2000, 1);
+insert into item values (3, '라네즈 네오 쿠션', 30000, 20000, 1000, 23000, 3);
+select * from item where name like '%선%';
+select * from item where name= '수분크림';
+
 drop table users;
-select * from tab;
+select * from item;

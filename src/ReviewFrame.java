@@ -14,7 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class ReviewFrame extends JFrame implements ActionListener{
 	
@@ -107,6 +109,8 @@ public class ReviewFrame extends JFrame implements ActionListener{
 		textArea3.setFont(new Font("굴림", Font.BOLD, 20));
 		textArea3.setEditable(false);
 		panel_content3.add("South", label_regDate3);
+		
+
 		
 	}
 	private void start() {

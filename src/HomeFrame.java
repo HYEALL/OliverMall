@@ -4,7 +4,9 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +25,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JButton btn_cart = new JButton(new ImageIcon("img/cart.png"));
 	JPanel panel_all = new JPanel();
 	JScrollPane scrollPane = new JScrollPane();
-	
+
 	JPanel panel_top = new JPanel();
 	JPanel panel_top_title = new JPanel();
 	JPanel panel_top_btn = new JPanel();
@@ -33,19 +35,19 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JPanel panel_item_content = new JPanel();
 	JButton[] categoryButtons = new JButton[4];
 	JButton btn_home = new JButton("Home");
-	String[] categoryStr = {"Skin", "Point", "Base", "Sun"};
+	String[] categoryStr = { "Skin", "Point", "Base", "Sun" };
 	JTextField tf_search = new JTextField();
-	// product
-	JButton suncare = new JButton(new ImageIcon("img/suncare.png"));
-	JLabel label_suncare = new JLabel("구달 맑은 선크림");
-	JButton suncare2 = new JButton(new ImageIcon("img/suncare.png"));
-	JLabel label_suncare2 = new JLabel("구달 맑은 선크림");
-	JButton suncare3 = new JButton(new ImageIcon("img/suncare.png"));
-	JLabel label_suncare3 = new JLabel("구달 맑은 선크림");
-	JButton suncare4 = new JButton(new ImageIcon("img/suncare.png"));
-	JLabel label_suncare4 = new JLabel("구달 맑은 선크림");
-	JButton suncare5 = new JButton(new ImageIcon("img/suncare.png"));
-	JLabel label_suncare5 = new JLabel("구달 맑은 선크림");
+
+
+	Item controller = new ItemController();
+	
+	// 상품 read
+	String str = controller.read();
+	String[] item_str = str.split("\n");
+
+	JButton[] item_btns = new JButton[item_str.length];
+	JLabel [] item_labels = new JLabel[item_str.length];
+	
 	public HomeFrame() {
 		// Frame 기본설정
 		setSize(400, 700);
@@ -54,8 +56,10 @@ public class HomeFrame extends JFrame implements ActionListener {
 		init();
 		start();
 		setVisible(true);
+		
 	}
-	
+
+
 	private void init() {
 		container.add(scrollPane);
 		scrollPane.setViewportView(panel_all);
@@ -64,7 +68,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_all.setBackground(Color.WHITE);
 		panel_all.add("North", panel_top);
 		panel_all.add("Center", panel_item);
-		
+
 		panel_top.setLayout(new GridLayout(2, 1, 0, 5));
 		panel_top.setBackground(Color.WHITE);
 		panel_top.add(panel_top_title);
@@ -82,7 +86,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		btn_search.setContentAreaFilled(false);
 		btn_cart.setBorderPainted(false);
 		btn_cart.setContentAreaFilled(false);
-		
+
 		panel_menu.setLayout(new FlowLayout());
 		panel_menu.add(btn_home);
 		panel_menu.setBackground(Color.WHITE);
@@ -90,57 +94,46 @@ public class HomeFrame extends JFrame implements ActionListener {
 		btn_home.setContentAreaFilled(false);
 		btn_home.setFont(new Font("Arial", Font.BOLD, 14));
 		btn_home.setPreferredSize(new Dimension(75, 40));
-		for(int i=0; i<4; i++) {
+		for (int i = 0; i < 4; i++) {
 			categoryButtons[i] = new JButton(categoryStr[i]);
 			categoryButtons[i].setPreferredSize(new Dimension(70, 40));
 			categoryButtons[i].setFont(new Font("Arial", Font.BOLD, 14));
 			categoryButtons[i].setBorderPainted(false);
 			categoryButtons[i].setContentAreaFilled(false);
-	        panel_menu.add(categoryButtons[i]);
+			panel_menu.add(categoryButtons[i]);
 		}
 		panel_item.setLayout(new BorderLayout());
 		panel_item.add("West", panel_item_image);
 		panel_item.add("Center", panel_item_content);
-		
-		// button에 상품 사진, label에 가격정보 가져오기
-		panel_item_image.setLayout(new GridLayout(10, 1));
+
+		panel_item_image.setLayout(new GridLayout(item_str.length, 1));
 		panel_item_image.setBackground(Color.WHITE);
-		panel_item_image.add(suncare);
-		suncare.setBorderPainted(false);
-		suncare.setContentAreaFilled(false);
-		panel_item_image.add(suncare2);
-		suncare2.setBorderPainted(false);
-		suncare2.setContentAreaFilled(false);
-		panel_item_image.add(suncare3);
-		suncare3.setBorderPainted(false);
-		suncare3.setContentAreaFilled(false);
-		panel_item_image.add(suncare4);
-		suncare4.setBorderPainted(false);
-		suncare4.setContentAreaFilled(false);
-		panel_item_image.add(suncare5);
-		suncare5.setBorderPainted(false);
-		suncare5.setContentAreaFilled(false);
-		panel_item_content.setLayout(new GridLayout(10, 1));
+
+		for (int i = 0; i < item_str.length; i++) {
+			item_btns[i] = new JButton(new ImageIcon("img/"+(i+1)+".png"));;
+			item_btns[i].setBorderPainted(false);
+			item_btns[i].setContentAreaFilled(false);
+			panel_item_image.add(item_btns[i]);
+		}
+		panel_item_content.setLayout(new GridLayout(item_str.length, 1));
 		panel_item_content.setBackground(Color.WHITE);
-		panel_item_content.add(label_suncare);
-		panel_item_content.add(label_suncare2);
-		panel_item_content.add(label_suncare3);
-		panel_item_content.add(label_suncare4);
-		panel_item_content.add(label_suncare5);
-		
+		for (int i = 0; i < item_str.length; i++) {
+			item_labels[i] = new JLabel(item_str[i]);
+			item_labels[i].setFont(new Font("굴림", Font.PLAIN, 12));
+			panel_item_content.add(item_labels[i]);
+		}
+
+
+
 	}
 
 	private void start() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		
 	}
-
-	
 
 }
