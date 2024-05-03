@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class HomeFrame extends JFrame implements ActionListener {
+public class CategoryFrame extends JFrame implements ActionListener {
 	Container container = getContentPane();
 	JLabel logo = new JLabel(new ImageIcon("img/logo.png"));
 	JButton btn_search = new JButton(new ImageIcon("img/search.png"));
@@ -43,9 +43,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 
 
 	Item controller = new ItemController();
-	
+	int category;
 	// 상품 read
-	String str = controller.read();
+	String str = controller.readCategory(Integer.toString(category));
 	String[] item_strs = str.split("\t");
 	int size = item_strs.length;
 	JTextArea[] item_textAreas = new JTextArea[size];
@@ -54,7 +54,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JPanel[] panel_items = new JPanel[size];
 
 
-	public HomeFrame() {
+	public CategoryFrame(int category) {
+		
+		this.category = category;
 		// Frame 기본설정
 		setSize(400, 700);
 		setTitle("올리버몰");
@@ -148,16 +150,12 @@ public class HomeFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == categoryButtons[0]) { // 스킨 케어
 			new CategoryFrame(1);
-			setVisible(false);
 		} else if(e.getSource() == categoryButtons[1]) { // 포인트 메이크업
-			new CategoryFrame(2);
-			setVisible(false);
+			
 		} else if(e.getSource() == categoryButtons[2]) { // 베이스 메이크업
-			new CategoryFrame(3);
-			setVisible(false);
+			
 		} else if(e.getSource() == categoryButtons[3]) { // 선케어
-			new CategoryFrame(4);
-			setVisible(false);
+			
 		}
 	}
 

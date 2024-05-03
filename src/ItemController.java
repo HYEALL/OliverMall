@@ -9,6 +9,7 @@ public class ItemController implements Item{
 		for(int i=0; i<list.size(); i++) {
 			ItemDTO dto = list.get(i);
 			result += dto.toString() + "\t";
+			System.out.println(dto.toString());
 		}
 		return result;
 	}
@@ -16,6 +17,17 @@ public class ItemController implements Item{
 	public String searchName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public String readCategory(String category) {
+		List<ItemDTO> list = dao.selectCategory(category);
+		String result = "";
+		for(int i=0; i<list.size(); i++) {
+			ItemDTO dto = list.get(i);
+			result += dto.toString() + "\t";
+			
+		}
+		return result;
 	}
 	
 }

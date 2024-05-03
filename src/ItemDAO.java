@@ -66,6 +66,44 @@ public class ItemDAO {
 		return list;
 	}
 	
+	public List<ItemDTO> selectCategory(String kind) {
+		String sql = "select * from item where kind like ?";
+		List<ItemDTO> list = new ArrayList<ItemDTO>();
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println("실행"+kind);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, String.valueOf(kind));
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ItemDTO dto = new ItemDTO();
+				dto.setItemno(rs.getInt("itemno"));
+				dto.setName(rs.getString("name"));
+				dto.setCost(rs.getInt("cost"));
+				dto.setSale(rs.getInt("sale"));
+				dto.setProfit(rs.getInt("profit"));
+				dto.setDiscount(rs.getInt("discount"));
+				dto.setKind(rs.getString("kind"));
+				System.out.println(dto.toString());
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	
 	public List<ItemDTO> searchName(String name) {
 		String sql = "select * from item where name like ?";
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
