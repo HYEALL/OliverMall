@@ -61,6 +61,7 @@ insert into item values (2, '닥터지 수분 수딩 크림', 11000, 9000, 1000, 2000, 1)
 insert into item values (3, '라네즈 네오 쿠션', 30000, 20000, 1000, 10000, 3);
 insert into item values (4, '클리오 펜슬 아이라이너', 11000, 7000, 1000, 3000, 2);
 insert into item values (5, '클리오 킬래쉬 마스카라', 18000, 12000, 1000, 6000, 2);
+insert into item values (6, '클리오 킬브로우 아이브로우', 20000, 17000, 1000, 3000, 2);
 select * from item where name like '%선%';
 select * from item where name= '수분크림';
 select * from item where kind= '1';
