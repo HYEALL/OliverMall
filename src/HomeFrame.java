@@ -26,6 +26,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JLabel logo = new JLabel(new ImageIcon("img/logo.png"));
 	JButton btn_search = new JButton(new ImageIcon("img/search.png"));
 	JButton btn_cart = new JButton(new ImageIcon("img/cart.png"));
+	JButton btn_order = new JButton(new ImageIcon("img/order.png"));
 	JPanel panel_all = new JPanel();
 	JScrollPane scrollPane = new JScrollPane();
 
@@ -92,7 +93,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_top.setBackground(Color.WHITE);
 		panel_top.add(panel_top_title);
 		panel_top.add(panel_menu);
-		panel_top_title.setLayout(new BorderLayout(10, 10));
+		panel_top_title.setLayout(new BorderLayout(2, 10));
 		panel_top_title.setBackground(Color.WHITE);
 		panel_top_title.add("West", logo);
 		panel_top_title.add("Center", tf_search);
@@ -101,11 +102,13 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_top_btn.setBackground(Color.WHITE);
 		panel_top_btn.add(btn_search);
 		panel_top_btn.add(btn_cart);
+		panel_top_btn.add(btn_order);
 		btn_search.setBorderPainted(false);
 		btn_search.setContentAreaFilled(false);
 		btn_cart.setBorderPainted(false);
 		btn_cart.setContentAreaFilled(false);
-
+		btn_order.setBorderPainted(false);
+		btn_order.setContentAreaFilled(false);
 		panel_menu.setLayout(new FlowLayout());
 		panel_menu.add(btn_home);
 		panel_menu.setBackground(Color.WHITE);
