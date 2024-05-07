@@ -154,6 +154,7 @@ public class CategoryFrame extends JFrame implements ActionListener {
 			categoryButtons[i].addActionListener(this);
 		}
 		btn_home.addActionListener(this);
+		btn_search.addActionListener(this);
 	}
 
 	@Override
@@ -172,6 +173,14 @@ public class CategoryFrame extends JFrame implements ActionListener {
 			setVisible(false);
 		} else if(e.getSource() == btn_home) { // 홈
 			new HomeFrame();
+			setVisible(false);
+		} else if(e.getSource() == btn_search) {
+			String name = tf_search.getText();
+			if (name.equals("")) {
+				JOptionPane.showMessageDialog(this, "검색어를 입력하세요");
+				return; // 함수 강제 종료
+			}
+			new HomeFrame(name);
 			setVisible(false);
 		}
 	}

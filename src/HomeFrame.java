@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -45,14 +46,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	Item controller = new ItemController();
 	
 	// 상품 read
-	String str = controller.read();
-	String[] item_strs = str.split("\t");
-	int size = item_strs.length;
-	String[] item_nos = new String[size];
-	JTextArea[] item_textAreas = new JTextArea[size];
-	JScrollPane[] item_scrollPane = new JScrollPane[size];
-	JButton[] item_btns = new JButton[size];
-	JPanel[] panel_items = new JPanel[size];
+	String str = "";
 
 
 	public HomeFrame() {
@@ -60,14 +54,33 @@ public class HomeFrame extends JFrame implements ActionListener {
 		setSize(400, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
+		str = controller.read();
+		init();
+		start();
+		setVisible(true);
+		
+	}
+	public HomeFrame(String name) {
+		// Frame 기본설정
+		setSize(400, 700);
+		setTitle("올리버몰");
+		setLocation(400, 200);
+		str = controller.searchName(name);
 		init();
 		start();
 		setVisible(true);
 		
 	}
 
-
 	private void init() {
+		String[] item_strs = str.split("\t");
+		int size = item_strs.length;
+		String[] item_nos = new String[size];
+		JTextArea[] item_textAreas = new JTextArea[size];
+		JScrollPane[] item_scrollPane = new JScrollPane[size];
+		JButton[] item_btns = new JButton[size];
+		JPanel[] panel_items = new JPanel[size];
+
 		container.add(scrollPane);
 		scrollPane.setViewportView(panel_all);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
@@ -118,7 +131,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 		
 
 		for(int i=0; i< size; i++) {
-			item_nos[i] = item_strs[i].substring(3, 4);
+			if (item_strs[i].length() >= 4) {
+				item_nos[i] = item_strs[i].substring(3, 4);
+			}
 		}
 		for (int i = 0; i < size; i++) {
 			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
@@ -147,6 +162,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 			categoryButtons[i].addActionListener(this);
 		}
 		btn_home.addActionListener(this);
+		btn_search.addActionListener(this);
 	}
 
 	@Override
@@ -165,6 +181,14 @@ public class HomeFrame extends JFrame implements ActionListener {
 			setVisible(false);
 		} else if(e.getSource() == btn_home) { // 홈
 			new HomeFrame();
+			setVisible(false);
+		} else if(e.getSource() == btn_search) {
+			String name = tf_search.getText();
+			if (name.equals("")) {
+				JOptionPane.showMessageDialog(this, "검색어를 입력하세요");
+				return; // 함수 강제 종료
+			}
+			new HomeFrame(name);
 			setVisible(false);
 		}
 	}

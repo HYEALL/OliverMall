@@ -1,5 +1,8 @@
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+
 public class ItemController implements Item{
 	ItemDAO dao = new ItemDAO();
 	@Override
@@ -14,8 +17,13 @@ public class ItemController implements Item{
 	}
 	@Override
 	public String searchName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ItemDTO> list = dao.searchName(name);
+		String result = "";
+		for(int i=0; i<list.size(); i++) {
+			ItemDTO dto = list.get(i);
+			result += dto.toString() + "\n";
+		}
+		return result;
 	}
 	@Override
 	public String readCategory(String category) {
