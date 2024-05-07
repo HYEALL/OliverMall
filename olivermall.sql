@@ -55,14 +55,24 @@ create table admin (
   adminid varchar2(20) primary key,
   password varchar2(20) not null
 );
-delete item where itemno = 4;
+delete item where itemno = 1;
 insert into item values (1, '식물나라 수분 선크림', 10000, 9500, 1000, 500, 4);
 insert into item values (2, '닥터지 수분 수딩 크림', 11000, 9000, 1000, 2000, 1);
 insert into item values (3, '라네즈 네오 쿠션', 30000, 20000, 1000, 10000, 3);
-insert into item values (4, '클리오 펜슬 아이라이너', 11000, 7000, 1000, 3000, 3);
+insert into item values (4, '클리오 펜슬 아이라이너', 11000, 7000, 1000, 3000, 2);
+insert into item values (5, '클리오 킬래쉬 마스카라', 18000, 12000, 1000, 6000, 2);
 select * from item where name like '%선%';
 select * from item where name= '수분크림';
 select * from item where kind= '1';
 drop table users;
 select * from item;
+
+select orders.orderadate, item.name, orders.orderno, orders.itemno, orders.count, 
+         item.sale, orders.orderstatus  
+FROM  
+        orders
+        INNER join
+        item
+        on item.itemno = orders.order.itemno;
+
 commit;
