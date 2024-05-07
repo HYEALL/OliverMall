@@ -72,7 +72,6 @@ public class ItemDAO {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println("실행"+kind);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, String.valueOf(kind));
@@ -86,7 +85,6 @@ public class ItemDAO {
 				dto.setProfit(rs.getInt("profit"));
 				dto.setDiscount(rs.getInt("discount"));
 				dto.setKind(rs.getString("kind"));
-				System.out.println(dto.toString());
 				list.add(dto);
 			}
 		} catch (SQLException e) {

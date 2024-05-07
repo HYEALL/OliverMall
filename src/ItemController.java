@@ -9,7 +9,6 @@ public class ItemController implements Item{
 		for(int i=0; i<list.size(); i++) {
 			ItemDTO dto = list.get(i);
 			result += dto.toString() + "\t";
-			System.out.println(dto.toString());
 		}
 		return result;
 	}

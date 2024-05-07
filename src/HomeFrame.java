@@ -48,6 +48,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	String str = controller.read();
 	String[] item_strs = str.split("\t");
 	int size = item_strs.length;
+	String[] item_nos = new String[size];
 	JTextArea[] item_textAreas = new JTextArea[size];
 	JScrollPane[] item_scrollPane = new JScrollPane[size];
 	JButton[] item_btns = new JButton[size];
@@ -112,17 +113,21 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_item.add("West", panel_item_image);
 		panel_item.add("Center", panel_item_content);
 
-		panel_item_image.setLayout(new GridLayout(size, 1, 0, 10));
+		panel_item_image.setLayout(new GridLayout(size+2, 1, 0, 10));
 		panel_item_image.setBackground(Color.WHITE);
+		
 
+		for(int i=0; i< size; i++) {
+			item_nos[i] = item_strs[i].substring(3, 4);
+		}
 		for (int i = 0; i < size; i++) {
-			item_btns[i] = new JButton(new ImageIcon("img/"+(i+1)+".png"));;
+			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
 			item_btns[i].setBorderPainted(false);
 			item_btns[i].setContentAreaFilled(false);
 			panel_item_image.add(item_btns[i]);
 		}
 
-		panel_item_content.setLayout(new GridLayout(size, 1, 0, 10));
+		panel_item_content.setLayout(new GridLayout(size+2, 1, 0, 10));
 		panel_item_content.setBackground(Color.WHITE);
 		for (int i = 0; i < size; i++) {
 			item_textAreas[i] = new JTextArea(item_strs[i]);
@@ -141,7 +146,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		for(int i=0; i<4; i++) {
 			categoryButtons[i].addActionListener(this);
 		}
-
+		btn_home.addActionListener(this);
 	}
 
 	@Override
@@ -157,6 +162,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 			setVisible(false);
 		} else if(e.getSource() == categoryButtons[3]) { // 선케어
 			new CategoryFrame(4);
+			setVisible(false);
+		} else if(e.getSource() == btn_home) { // 홈
+			new HomeFrame();
 			setVisible(false);
 		}
 	}
