@@ -125,34 +125,37 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_item.setLayout(new BorderLayout());
 		panel_item.add("West", panel_item_image);
 		panel_item.add("Center", panel_item_content);
-
-		panel_item_image.setLayout(new GridLayout(size+2, 1, 0, 10));
+		panel_item_content.setBackground(Color.WHITE);
+		
+		panel_item_image.setLayout(new GridLayout(size+1, 1, 0, 10));
 		panel_item_image.setBackground(Color.WHITE);
 		
-
-		for(int i=0; i< size; i++) {
-			if (item_strs[i].length() >= 4) {
-				item_nos[i] = item_strs[i].substring(3, 4);
+		if (size > 1) {
+			for(int i=0; i< size; i++) {
+				if (item_strs[i].length() >= 4) {
+					item_nos[i] = item_strs[i].substring(3, 4);
+				}
 			}
-		}
-		for (int i = 0; i < size; i++) {
-			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
-			item_btns[i].setBorderPainted(false);
-			item_btns[i].setContentAreaFilled(false);
-			panel_item_image.add(item_btns[i]);
-		}
+			for (int i = 0; i < size; i++) {
+				item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
+				item_btns[i].setBorderPainted(false);
+				item_btns[i].setContentAreaFilled(false);
+				panel_item_image.add(item_btns[i]);
+			}
+	
+			panel_item_content.setLayout(new GridLayout(size+1, 1, 0, 10));
+			for (int i = 0; i < size; i++) {
+				item_textAreas[i] = new JTextArea(item_strs[i]);
+				item_textAreas[i].setEditable(false);
+				item_textAreas[i].setFont(new Font("돋움", Font.BOLD, 15));
+				item_textAreas[i].setBorder(null);
+				panel_item_content.add(item_textAreas[i]);
+				
+				}
+		} else {
 
-		panel_item_content.setLayout(new GridLayout(size+2, 1, 0, 10));
-		panel_item_content.setBackground(Color.WHITE);
-		for (int i = 0; i < size; i++) {
-			item_textAreas[i] = new JTextArea(item_strs[i]);
-			item_textAreas[i].setEditable(false);
-			item_textAreas[i].setFont(new Font("돋움", Font.BOLD, 15));
-			item_textAreas[i].setBorder(null);
-			panel_item_content.add(item_textAreas[i]);
-			
+			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
 		}
-
 
 	}
 
