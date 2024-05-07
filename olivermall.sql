@@ -1,13 +1,14 @@
 create table users(
     name varchar2(10) not null,     -- 이름
-    userid varchar2(20) not null,   -- 아이디
-    userpw varchar2(20)not null,    -- 비밀번호
-    tel varchar2(20)not null,       -- 전화번호
+    id varchar2(20) not null,   -- 아이디
+    pw varchar2(20)not null,    -- 비밀번호
+    tel varchar2(20),       -- 전화번호
+    gender varchar2(10),             -- 성별
+    birth varchar2(10),        -- 생년월일
     email varchar2(30),             -- 이메일
-    gender varchar2(5),             -- 성별
-    birthdate date NOT NULL,        -- 생년월일
-    primary key (userid)
-);
+    primary key (id) 
+);  
+
 -- 상품
 CREATE TABLE item (
     itemno number(5) PRIMARY KEY,      -- 상품번호
@@ -23,15 +24,24 @@ CREATE TABLE item (
 -- order(주문) 테이블
 create table orders (
     orderno varchar2(20) not null,      -- 주문번호
-    orderadate date not null,  -- 주문일자
-    userid varchar(20) not null,       -- 주문자
-    ordermenu varchar(30) not null,     -- 주문목록
-    orderstatus varchar(10),   -- 주문상태
-    itemno NUMBER(5) not null, 
+    orderadate varchar2(20) not null,  -- 주문일자
+    orderstatus varchar2(20),   -- 주문상태
+    itemno NUMBER not null,
     primary key (orderno),
-    constraint fk_user FOREIGN KEY(userid) REFERENCES users(userid),
     constraint fk_item FOREIGN KEY(itemno) REFERENCES item(itemno)
 );
+
+ INSERT INTO item VALUES (10987,'필리밀리 파워 커링 뷰러', 9500, 8100, 1400, 14, 1);
+ INSERT INTO item VALUES (10786,'에뛰드 톤업 수정 선크림', 25000, 19900, 5100, 20, 1);
+ INSERT INTO item VALUES(10564,'딘토 블러글로이 립 틴트', 20000, 12600, 7400, 37, 2 );
+INSERT INTO item VALUES(10876, '브링그린 세럼마스크',3000,1500,1500, 50, 3);
+ INSERT INTO item VALUES(10789, '클리오 수퍼프루프 라이너', 18000, 12600, 5400, 30,3);
+INSERT INTO orders VALUES ('Y230998','2024-01-09', '주문완료', 10987); 
+  INSERT INTO orders VALUES ('Y567889', '2024-02-22', '주문완료',10786); 
+  INSERT INTO orders VALUES ('Y267889', '2024-04-22', '주문완료',10564); 
+  INSERT INTO orders VALUES ('Z987547', '2024-05-06', '배송중',10876);
+  INSERT INTO orders VALUES ('Q678904', '2024-05-05', '배송중',10789);
+   select * from orders;
 
 -- 장바구니
 create table cart (
@@ -45,12 +55,17 @@ create table review (
     reviewno number,  -- 리뷰 번호
     title varchar2(20), -- 리뷰 제목
     content varchar2(1000), -- 리뷰 내용
-    userid varchar2(20), -- 사용자 아이디
+    itemno number(5), -- 상품 번호
+    id varchar(20), -- 유저 아이디
     regDate date, -- 작성 일자
     primary key(reviewno), 
-    constraint fk_reviewuser FOREIGN KEY(userid) REFERENCES users(userid)
+    constraint fk_reviewitem FOREIGN KEY(itemno) REFERENCES item(itemno),
+    constraint fk_reviewuser FOREIGN KEY(id) REFERENCES users(id)
 );
-
+insert into users (name, id, pw) values ('가나다', 'abc', 1234);
+insert into review values (1, '좋아요', '아주 좋아요', 1, 'abc', '2024-05-01');
+insert into review values (2, '좋아요 3번상품', '아주 좋아요 3번상품', 3, 'abc', '2024-05-01');
+select * from review where itemno= 3;
 create table admin (
   adminid varchar2(20) primary key,
   password varchar2(20) not null
@@ -65,14 +80,19 @@ insert into item values (6, '클리오 킬브로우 아이브로우', 20000, 17000, 1000, 30
 select * from item where name like '%선%';
 select * from item where name= '수분크림';
 select * from item where kind= '1';
-drop table users;
+drop table orders;
 select * from item;
+select * from tab;
 
 select orders.orderadate, item.name, orders.orderno, orders.itemno, orders.count, 
          item.sale, orders.orderstatus  
 FROM  
         orders
         INNER join
+        item
+        on item.itemno = orders.order.itemno;
+        
+select * from orders INNER join
         item
         on item.itemno = orders.order.itemno;
 

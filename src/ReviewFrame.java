@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class ReviewFrame extends JFrame implements ActionListener{
-	
+	Review controller = new ReviewController();
 	Container container = getContentPane();
 	JLabel logo = new JLabel(new ImageIcon("img/logo.png"));
 	JButton btn_search = new JButton(new ImageIcon("img/search.png"));
@@ -33,30 +33,27 @@ public class ReviewFrame extends JFrame implements ActionListener{
 	JPanel panel_content2 = new JPanel();
 	JPanel panel_content3 = new JPanel();
 	JPanel panel_center = new JPanel();
-	JLabel label_writer = new JLabel("작성자이름가나다");
-	JTextArea textArea = new JTextArea("test\ntest\ntest\ntest");
-	JScrollPane textAreaScroll = new JScrollPane(textArea);
-	JLabel label_regDate = new JLabel("2024.05.01");
+	String str = "";
 	
-	JLabel label_writer2 = new JLabel("작성자이름가나다");
-	JTextArea textArea2 = new JTextArea();
-	JScrollPane textAreaScroll2 = new JScrollPane(textArea2);
-	JLabel label_regDate2 = new JLabel("2024.05.01");
-	
-	JLabel label_writer3 = new JLabel("작성자이름가나다");
-	JTextArea textArea3 = new JTextArea();
-	JScrollPane textAreaScroll3 = new JScrollPane(textArea3);
-	JLabel label_regDate3 = new JLabel("2024.05.01");
 	public ReviewFrame() {
 		// Frame 기본설정
 		setSize(400, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
+		str = controller.searchItemNo(3);
 		init();
 		start();
 		setVisible(true);
 	}
 	private void init() {
+		String[] review_strs = str.split("\t");
+		int size = review_strs.length;
+		String[] review_id = new String[size];
+		String[] review_content = new String[size];
+		JTextArea[] review_textAreas = new JTextArea[size];
+		JScrollPane[] review_scrollPane = new JScrollPane[size];
+		JLabel[] label_reviews = new JLabel[size];
+		JPanel[] panel_content = new JPanel[size];
 		container.add(scrollPane);
 		scrollPane.setViewportView(panel_all);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
@@ -79,37 +76,26 @@ public class ReviewFrame extends JFrame implements ActionListener{
 		
 		panel_center.setLayout(new GridLayout(5, 1, 0, 30));
 		panel_center.setBackground(Color.WHITE);
-		panel_center.add(panel_content);
-		panel_center.add(panel_content2);
-		panel_center.add(panel_content3);
-		
-		panel_content.setBackground(Color.WHITE);
-		panel_content.setLayout(new BorderLayout());
-		panel_content.add("North", label_writer);
-		label_writer.setFont(new Font("굴림", Font.BOLD, 16));
-		panel_content.add("Center", textAreaScroll);
-		textArea.setFont(new Font("굴림", Font.BOLD, 20));
-		textArea.setEditable(false);
-		panel_content.add("South", label_regDate);
-		
-		panel_content2.setBackground(Color.WHITE);
-		panel_content2.setLayout(new BorderLayout());
-		panel_content2.add("North", label_writer2);
-		label_writer2.setFont(new Font("굴림", Font.BOLD, 16));
-		panel_content2.add("Center", textAreaScroll2);
-		textArea2.setFont(new Font("굴림", Font.BOLD, 20));
-		textArea2.setEditable(false);
-		panel_content2.add("South", label_regDate2);
-		
-		panel_content3.setBackground(Color.WHITE);
-		panel_content3.setLayout(new BorderLayout());
-		panel_content3.add("North", label_writer3);
-		label_writer3.setFont(new Font("굴림", Font.BOLD, 16));
-		panel_content3.add("Center", textAreaScroll3);
-		textArea3.setFont(new Font("굴림", Font.BOLD, 20));
-		textArea3.setEditable(false);
-		panel_content3.add("South", label_regDate3);
-		
+		for(int i=0; i< size; i++) {
+			int idx = review_strs[i].indexOf('\n');
+			review_id[i] = review_strs[i].substring(0, idx);
+			review_content[i] = review_strs[i].substring(idx, review_strs[i].length());
+			panel_content[i].setBackground(Color.WHITE);
+			panel_center.add(panel_content[i]);
+			panel_content[i].setLayout(new BorderLayout());
+		}
+		for (int i = 0; i < size; i++) {
+			label_reviews[i] = new JLabel(review_id[i]);
+			panel_content[i].add("North", label_reviews[i]);
+			label_reviews[i].setFont(new Font("굴림", Font.BOLD, 16));
+			review_textAreas[i] = new JTextArea(review_content[i]);
+			review_textAreas[i].setEditable(false);
+			review_textAreas[i].setFont(new Font("굴림", Font.BOLD, 15));
+			review_textAreas[i].setBorder(null);
+			panel_content[i].add("Center", review_textAreas[i]);
+		}
+
+
 
 		
 	}

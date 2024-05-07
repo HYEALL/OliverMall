@@ -45,7 +45,6 @@ public class HomeFrame extends JFrame implements ActionListener {
 
 	Item controller = new ItemController();
 	
-	// 상품 read
 	String str = "";
 
 
@@ -151,7 +150,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 				item_textAreas[i].setBorder(null);
 				panel_item_content.add(item_textAreas[i]);
 				
-				}
+			}
 		} else {
 
 			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
