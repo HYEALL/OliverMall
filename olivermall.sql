@@ -31,11 +31,7 @@ create table orders (
     constraint fk_item FOREIGN KEY(itemno) REFERENCES item(itemno)
 );
 
- INSERT INTO item VALUES (10987,'필리밀리 파워 커링 뷰러', 9500, 8100, 1400, 14, 1);
- INSERT INTO item VALUES (10786,'에뛰드 톤업 수정 선크림', 25000, 19900, 5100, 20, 1);
- INSERT INTO item VALUES(10564,'딘토 블러글로이 립 틴트', 20000, 12600, 7400, 37, 2 );
-INSERT INTO item VALUES(10876, '브링그린 세럼마스크',3000,1500,1500, 50, 3);
- INSERT INTO item VALUES(10789, '클리오 수퍼프루프 라이너', 18000, 12600, 5400, 30,3);
+ 
 INSERT INTO orders VALUES ('Y230998','2024-01-09', '주문완료', 8); 
   INSERT INTO orders VALUES ('Y567889', '2024-02-22', '주문완료',10786); 
   INSERT INTO orders VALUES ('Y267889', '2024-04-22', '주문완료',10564); 
@@ -70,7 +66,9 @@ create table admin (
   adminid varchar2(20) primary key,
   password varchar2(20) not null
 );
-delete item where itemno = 1;
+
+
+delete item where itemno = 10789;
 insert into item values (1, '식물나라 수분 선크림', 10000, 9500, 1000, 500, 4);
 insert into item values (2, '닥터지 수분 수딩 크림', 11000, 9000, 1000, 2000, 1);
 insert into item values (3, '라네즈 네오 쿠션', 30000, 20000, 1000, 10000, 3);
@@ -81,7 +79,7 @@ insert into item values (6, '클리오 킬브로우 아이브로우', 20000, 17000, 1000, 30
 select * from item where name like '%선%';
 select * from item where name= '수분크림';
 select * from item where kind= '1';
-drop table orders;
+drop table orders purge;
 select * from item;
 select * from tab;
 
