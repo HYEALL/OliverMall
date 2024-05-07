@@ -36,7 +36,7 @@ create table orders (
  INSERT INTO item VALUES(10564,'딘토 블러글로이 립 틴트', 20000, 12600, 7400, 37, 2 );
 INSERT INTO item VALUES(10876, '브링그린 세럼마스크',3000,1500,1500, 50, 3);
  INSERT INTO item VALUES(10789, '클리오 수퍼프루프 라이너', 18000, 12600, 5400, 30,3);
-INSERT INTO orders VALUES ('Y230998','2024-01-09', '주문완료', 10987); 
+INSERT INTO orders VALUES ('Y230998','2024-01-09', '주문완료', 8); 
   INSERT INTO orders VALUES ('Y567889', '2024-02-22', '주문완료',10786); 
   INSERT INTO orders VALUES ('Y267889', '2024-04-22', '주문완료',10564); 
   INSERT INTO orders VALUES ('Z987547', '2024-05-06', '배송중',10876);
@@ -77,6 +77,7 @@ insert into item values (3, '라네즈 네오 쿠션', 30000, 20000, 1000, 10000, 3);
 insert into item values (4, '클리오 펜슬 아이라이너', 11000, 7000, 1000, 3000, 2);
 insert into item values (5, '클리오 킬래쉬 마스카라', 18000, 12000, 1000, 6000, 2);
 insert into item values (6, '클리오 킬브로우 아이브로우', 20000, 17000, 1000, 3000, 2);
+
 select * from item where name like '%선%';
 select * from item where name= '수분크림';
 select * from item where kind= '1';
@@ -84,16 +85,15 @@ drop table orders;
 select * from item;
 select * from tab;
 
-select orders.orderadate, item.name, orders.orderno, orders.itemno, orders.count, 
+select orders.orderadate, item.name, orders.orderno, orders.itemno, 
          item.sale, orders.orderstatus  
 FROM  
         orders
         INNER join
         item
-        on item.itemno = orders.order.itemno;
+        on item.itemno = orders.itemno;
         
-select * from orders INNER join
-        item
-        on item.itemno = orders.order.itemno;
+select orders.*, item.* from orders 
+INNER join item on item.itemno = orders.itemno;
 
 commit;
