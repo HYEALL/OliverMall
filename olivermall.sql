@@ -49,40 +49,40 @@ create table review (
     constraint fk_reviewuser FOREIGN KEY(id) REFERENCES users(id)
 );
 
-insert into users (name, id, pw) values ('가나다', 'abc', 1234);
-insert into review values (1, '좋아요', '아주 좋아요', 1, 'abc', '2024-05-01');
-insert into review values (2, '좋아요 3번상품', '아주 좋아요 3번상품', 3, 'abc', '2024-05-01');
-select * from review where itemno= 3;
-drop table review;
+--insert into users (name, id, pw) values ('가나다', 'abc', 1234);
+--insert into review values (1, '좋아요', '아주 좋아요', 1, 'abc', '2024-05-01');
+--insert into review values (2, '좋아요 3번상품', '아주 좋아요 3번상품', 3, 'abc', '2024-05-01');
+--select * from review where itemno= 3;
+--drop table review;
 create table admin (
   adminid varchar2(20) primary key,
   password varchar2(20) not null
 );
 
-select * from users where id='jangjang';
-delete orders where orderno = 'Q678907';
+--select * from users where id='jangjang';
+--delete orders where orderno = 'Q678907';
 
-select * from orders INNER JOIN item on item.itemno = orders.itemno;
-delete orders where orderno = 'Y267889';
-select * from item where name like '%선%';
-select * from item where name= '수분크림';
-select * from item where kind= '1';
-drop table orders purge;
-select * from orders;
-select * from item;
-select * from tab;
+--select * from orders INNER JOIN item on item.itemno = orders.itemno;
+--delete orders where orderno = 'Y267889';
+--select * from item where name like '%선%';
+--select * from item where name= '수분크림';
+--select * from item where kind= '1';
+--drop table orders purge;
+--select * from orders;
+--select * from item;
+--select * from tab;
 
-select orders.orderadate, item.name, orders.orderno, orders.itemno, 
-         item.sale, orders.orderstatus  
-FROM  
-        orders
-        INNER join
-        item
-        on item.itemno = orders.itemno;
-        
-select orders.*, item.* from orders 
-INNER join item on item.itemno = orders.itemno;
-
+--select orders.orderadate, item.name, orders.orderno, orders.itemno, 
+--         item.sale, orders.orderstatus  
+--FROM  
+--        orders
+--        INNER join
+--        item
+--        on item.itemno = orders.itemno;
+--        
+--select orders.*, item.* from orders 
+--INNER join item on item.itemno = orders.itemno;
+--
 
 
 ---
@@ -105,5 +105,5 @@ INSERT INTO orders VALUES ('Y267889', '2024-04-22', '주문완료',6);
 INSERT INTO orders VALUES ('Z987547', '2024-05-06', '배송중',4);
 INSERT INTO orders VALUES ('Q678904', '2024-05-05', '배송중',5);
 INSERT INTO orders VALUES ('Q678907', '2024-05-05', '배송중',10);
-
+select * from users;
 commit;

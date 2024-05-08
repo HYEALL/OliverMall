@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.JoinImpl;
@@ -50,7 +51,7 @@ public class LoginForm extends JFrame implements ActionListener {
 		// panel 배경 설정
 		@Override
 		public void paintComponent(Graphics g) {
-			Image image = new ImageIcon("img/올리브몰2.png").getImage();
+			Image image = new ImageIcon("img/background.png").getImage();
 			// Scale image to size of component
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 			setOpaque(false); // 투명하게
@@ -59,7 +60,7 @@ public class LoginForm extends JFrame implements ActionListener {
 	};
 
 	JTextField tf_id = new JTextField(15);
-	JTextField tf_pw = new JTextField(15);
+	JPasswordField tf_pw = new JPasswordField(15);
 
 	JButton bt_login = new JButton("    Login    ");
 	JButton bt_join = new JButton("    Sing up     ");
