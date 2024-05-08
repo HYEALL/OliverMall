@@ -47,14 +47,28 @@ public class HomeFrame extends JFrame implements ActionListener {
 	Item controller = new ItemController();
 	
 	String str = "";
-
+	int category;
 
 	public HomeFrame() {
 		// Frame 기본설정
+		
 		setSize(430, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.read();
+		init();
+		start();
+		setVisible(true);
+		
+	}
+	
+	public HomeFrame(int c) {
+		category = c;
+		// Frame 기본설정
+		setSize(430, 700);
+		setTitle("올리버몰");
+		setLocation(400, 200);
+		str = controller.readCategory(Integer.toString(category));
 		init();
 		start();
 		setVisible(true);
@@ -72,8 +86,11 @@ public class HomeFrame extends JFrame implements ActionListener {
 		
 	}
 
+
 	private void init() {
 		String[] item_strs = str.split("\t");
+		if (str.equals("")) 
+			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
 		int size = item_strs.length;
 		String[] item_nos = new String[size];
 		JTextArea[] item_textAreas = new JTextArea[size];
@@ -129,36 +146,31 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_item.add("Center", panel_item_content);
 		panel_item_content.setBackground(Color.WHITE);
 		
-		panel_item_image.setLayout(new GridLayout(size+1, 1, 0, 10));
+		panel_item_image.setLayout(new GridLayout(size+2, 1, 0, 10));
 		panel_item_image.setBackground(Color.WHITE);
 		
-		if (size > 1) {
-			for(int i=0; i< size; i++) {
-				if (item_strs[i].length() >= 4) {
-					item_nos[i] = item_strs[i].substring(3, 4);
-				}
-			}
-			for (int i = 0; i < size; i++) {
-				item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
-				item_btns[i].setBorderPainted(false);
-				item_btns[i].setContentAreaFilled(false);
-				panel_item_image.add(item_btns[i]);
-			}
-	
-			panel_item_content.setLayout(new GridLayout(size+1, 1, 0, 10));
-			for (int i = 0; i < size; i++) {
-				item_textAreas[i] = new JTextArea(item_strs[i]);
-				item_textAreas[i].setEditable(false);
-				item_textAreas[i].setFont(new Font("돋움", Font.BOLD, 15));
-				item_textAreas[i].setBorder(null);
-				panel_item_content.add(item_textAreas[i]);
-				
-			}
-		} else {
 
-			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
+		for(int i=0; i< size; i++) {
+			if (item_strs[i].length() >= 4) {
+				item_nos[i] = item_strs[i].substring(3, 4);
+			}
+		}
+		for (int i = 0; i < size; i++) {
+			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
+			item_btns[i].setBorderPainted(false);
+			item_btns[i].setContentAreaFilled(false);
+			panel_item_image.add(item_btns[i]);
 		}
 
+		panel_item_content.setLayout(new GridLayout(size+2, 1, 0, 10));
+		for (int i = 0; i < size; i++) {
+			item_textAreas[i] = new JTextArea(item_strs[i]);
+			item_textAreas[i].setEditable(false);
+			item_textAreas[i].setFont(new Font("HY견고딕 보통", Font.BOLD, 15));
+			item_textAreas[i].setBorder(null);
+			panel_item_content.add(item_textAreas[i]);
+			
+		}
 	}
 
 	private void start() {
@@ -174,16 +186,16 @@ public class HomeFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == categoryButtons[0]) { // 스킨 케어
-			new CategoryFrame(1);
+			new HomeFrame(1);
 			setVisible(false);
 		} else if(e.getSource() == categoryButtons[1]) { // 포인트 메이크업
-			new CategoryFrame(2);
+			new HomeFrame(2);
 			setVisible(false);
 		} else if(e.getSource() == categoryButtons[2]) { // 베이스 메이크업
-			new CategoryFrame(3);
+			new HomeFrame(3);
 			setVisible(false);
 		} else if(e.getSource() == categoryButtons[3]) { // 선케어
-			new CategoryFrame(4);
+			new HomeFrame(4);
 			setVisible(false);
 		} else if(e.getSource() == btn_home) { // 홈
 			new HomeFrame();
