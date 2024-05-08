@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import controller.ItemController;
 import service.Item;
@@ -179,8 +180,17 @@ public class HomeFrame extends JFrame implements ActionListener {
 			panel_item_content.add(item_textAreas[i]);
 			
 		}
+		Runnable runnable = new Runnable() {         
+	        @Override
+	        public void run() {
+	           scrollPane.getVerticalScrollBar().setValue(0);
+	        }
+	     };
+	     
+	    SwingUtilities.invokeLater(runnable);
 	}
 
+     
 	private void start() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		for(int i=0; i<4; i++) {
