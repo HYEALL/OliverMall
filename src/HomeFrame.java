@@ -52,7 +52,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	public HomeFrame() {
 		// Frame 기본설정
 		
-		setSize(430, 700);
+		setSize(450, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.read();
@@ -65,7 +65,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	public HomeFrame(int c) {
 		category = c;
 		// Frame 기본설정
-		setSize(430, 700);
+		setSize(450, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.readCategory(Integer.toString(category));
@@ -76,7 +76,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	}
 	public HomeFrame(String name) {
 		// Frame 기본설정
-		setSize(430, 700);
+		setSize(450, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.searchName(name);
@@ -100,7 +100,8 @@ public class HomeFrame extends JFrame implements ActionListener {
 
 		container.add(scrollPane);
 		scrollPane.setViewportView(panel_all);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+		
+		// 시작 스크롤 위치 변경, 실패 scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		panel_all.setLayout(new BorderLayout());
 		panel_all.setBackground(Color.WHITE);
 		panel_all.add("North", panel_top);
@@ -151,8 +152,8 @@ public class HomeFrame extends JFrame implements ActionListener {
 		
 
 		for(int i=0; i< size; i++) {
-			if (item_strs[i].length() >= 4) {
-				item_nos[i] = item_strs[i].substring(3, 4);
+			if (item_strs[i].length() >= 5) {
+				item_nos[i] = item_strs[i].substring(3, 5);
 			}
 		}
 		for (int i = 0; i < size; i++) {

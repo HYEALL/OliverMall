@@ -27,7 +27,11 @@ public class ItemDTO {
 	@Override
 	public String toString() {
 		String str = "";
-		str = String.format("\n\n\n%s번 제품\n%s\n정가: %s원\n판매가: %s원", itemno, name, cost, sale);
+		if(itemno<10) {
+			str = String.format("\n\n\n0%s번 제품\n%s\n정가: %s원\n판매가: %s원", itemno, name, cost, sale);
+		} else {
+			str = String.format("\n\n\n%s번 제품\n%s\n정가: %s원\n판매가: %s원", itemno, name, cost, sale);
+		}
 		return str;
 	}
 

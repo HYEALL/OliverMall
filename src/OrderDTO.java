@@ -25,10 +25,14 @@ public class OrderDTO {
 
 	   @Override
 	   public String toString() {
-	      String str = String.format("%s번 제품\n%s\n%s\n%s\n%s", 
-	            itemno, orderadate, name, orderno,  orderstatus);
-	      
+	      String str = "";
+	      if(itemno<10) {
+				str = String.format("0%s번 제품\n%s\n%s\n%s\n%s", itemno, orderadate, name, orderno,  orderstatus);
+			} else {
+				str = String.format("%s번 제품\n%s\n%s\n%s\n%s", itemno, orderadate, name, orderno,  orderstatus);
+			}
 	      return str;
+	      
 	   }
 
 	   // getter & setter

@@ -59,7 +59,7 @@ public class OrderFrame extends JFrame{
 	public OrderFrame() {
 
 		// Frame 기본 설정
-		setSize(400, 700);
+		setSize(450, 700);
 		setTitle("OrderForm");
 		setLocation(400, 200);
 		str = order.readAll();
@@ -101,7 +101,7 @@ public class OrderFrame extends JFrame{
 		panel_item_content.setBackground(Color.white);
 		//textArea.setText(str);
 		//panel_center.add("Center", scrollPane);
-		panel_item_image.setLayout(new GridLayout(size+1, 1, 0, 10));
+		panel_item_image.setLayout(new GridLayout(size, 1, 0, 10));
 		panel_item_image.setBackground(Color.WHITE);
 		
 		
@@ -116,7 +116,7 @@ public class OrderFrame extends JFrame{
 		if (size > 1) {
 			for(int i=0; i< size; i++) {
 				if (item_strs[i].length() >= 4) {
-					item_nos[i] = item_strs[i].substring(0, 1);
+					item_nos[i] = item_strs[i].substring(0, 2);
 				}
 			}
 			for (int i = 0; i < size; i++) {
@@ -126,7 +126,7 @@ public class OrderFrame extends JFrame{
 				panel_item_image.add(item_btns[i]);
 			}
 	
-			panel_item_content.setLayout(new GridLayout(size+1, 1, 0, 10));
+			panel_item_content.setLayout(new GridLayout(size, 1, 0, 10));
 			for (int i = 0; i < size; i++) {
 				item_textAreas[i] = new JTextArea(item_strs[i]);
 				item_textAreas[i].setEditable(false);
