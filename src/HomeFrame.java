@@ -54,7 +54,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	
 	String str = "";
 	int category;
-
+	JButton[] item_btns;
 	public HomeFrame() {
 		// Frame 기본설정
 		
@@ -101,7 +101,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		String[] item_nos = new String[size];
 		JTextArea[] item_textAreas = new JTextArea[size];
 		JScrollPane[] item_scrollPane = new JScrollPane[size];
-		JButton[] item_btns = new JButton[size];
+		item_btns = new JButton[size];
 		JPanel[] panel_items = new JPanel[size];
 
 		container.add(scrollPane);
@@ -163,9 +163,10 @@ public class HomeFrame extends JFrame implements ActionListener {
 			}
 		}
 		for (int i = 0; i < size; i++) {
-			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
+			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));
 			item_btns[i].setBorderPainted(false);
 			item_btns[i].setContentAreaFilled(false);
+			item_btns[i].addActionListener(this);
 			panel_item_image.add(item_btns[i]);
 		}
 
@@ -195,6 +196,8 @@ public class HomeFrame extends JFrame implements ActionListener {
             	setVisible(false);
             }
         });
+
+		
 	}
 
 	@Override
@@ -225,7 +228,13 @@ public class HomeFrame extends JFrame implements ActionListener {
 		} else if(e.getSource() == btn_order) { // 주문 내역
 			new OrderFrame();
 			setVisible(false);
+		} for(int i=0; i<item_btns.length ; i++) {
+			if(e.getSource() == item_btns[i]) {// 상품별 클릭
+				new ItemFrame(i+1);
+			}
+			
 		}
+			
 	}
 
 }

@@ -94,6 +94,7 @@ public class UsersDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				dto = new UsersDTO();
 				dto.setId(rs.getString("id"));
@@ -103,16 +104,13 @@ public class UsersDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return dto;
 		}
+		return dto;
 	}
 }

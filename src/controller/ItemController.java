@@ -41,5 +41,10 @@ public class ItemController implements Item{
 		}
 		return result;
 	}
-	
+	@Override
+	public ItemDTO searchItemNo(int itemno) {
+		ItemDTO dto = new ItemDTO();
+		dto = dao.searchItemNo(itemno);
+		return dto;
+	}
 }

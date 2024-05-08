@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.ItemDTO;
+import dto.UsersDTO;
 
 public class ItemDAO {
 	public ItemDAO() {
@@ -142,6 +143,39 @@ public class ItemDAO {
 		}
 		return list;
 	}
-	
+	public ItemDTO searchItemNo(int itemno) {
+		String sql = "SELECT * FROM item WHERE itemno=?";
+		ItemDTO dto = null;
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemno);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = new ItemDTO();
+				dto.setItemno(rs.getInt("itemno"));
+				dto.setName(rs.getString("name"));
+				dto.setCost(rs.getInt("cost"));
+				dto.setSale(rs.getInt("sale"));
+				dto.setProfit(rs.getInt("profit"));
+				dto.setDiscount(rs.getInt("discount"));
+				dto.setKind(rs.getString("kind"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
 	
 }
