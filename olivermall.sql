@@ -19,7 +19,7 @@ CREATE TABLE item (
     -- 상품 카테고리
     kind CHAR(1)                       --  상품 종류(1: 스킨케어, 2:포인트메이크업, 3: 베이스메이크업, 4: 선케어)
 );
-
+SELECT * FROM item WHERE itemno=2;
 -- order(주문) 테이블
 create table orders (
     orderno varchar2(20) not null,      -- 주문번호
