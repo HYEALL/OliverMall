@@ -1,4 +1,4 @@
-package service;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controller.ItemController;
+import service.Item;
 
 public class HomeFrame extends JFrame implements ActionListener {
 	Container container = getContentPane();

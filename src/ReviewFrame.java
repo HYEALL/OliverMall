@@ -1,4 +1,4 @@
-package service;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import controller.ReviewController;
+import service.Review;
 
 public class ReviewFrame extends JFrame implements ActionListener{
 	Review controller = new ReviewController();

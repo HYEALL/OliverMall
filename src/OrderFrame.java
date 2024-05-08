@@ -1,4 +1,4 @@
-package service;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controller.OrderImpl;
+import service.Order;
 
 public class OrderFrame extends JFrame{
 	Container container = getContentPane();
