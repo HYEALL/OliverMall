@@ -26,6 +26,7 @@ public class CategoryFrame extends JFrame implements ActionListener {
 	JLabel logo = new JLabel(new ImageIcon("img/logo.png"));
 	JButton btn_search = new JButton(new ImageIcon("img/search.png"));
 	JButton btn_cart = new JButton(new ImageIcon("img/cart.png"));
+	JButton btn_order = new JButton(new ImageIcon("img/order.png"));
 	JPanel panel_all = new JPanel();
 	JScrollPane scrollPane = new JScrollPane();
 
@@ -54,7 +55,7 @@ public class CategoryFrame extends JFrame implements ActionListener {
 		
 		category = c;
 		// Frame 기본설정
-		setSize(400, 700);
+		setSize(430, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.readCategory(Integer.toString(category));
@@ -86,7 +87,7 @@ public class CategoryFrame extends JFrame implements ActionListener {
 		panel_top.setBackground(Color.WHITE);
 		panel_top.add(panel_top_title);
 		panel_top.add(panel_menu);
-		panel_top_title.setLayout(new BorderLayout(10, 10));
+		panel_top_title.setLayout(new BorderLayout(2, 10));
 		panel_top_title.setBackground(Color.WHITE);
 		panel_top_title.add("West", logo);
 		panel_top_title.add("Center", tf_search);
@@ -95,11 +96,14 @@ public class CategoryFrame extends JFrame implements ActionListener {
 		panel_top_btn.setBackground(Color.WHITE);
 		panel_top_btn.add(btn_search);
 		panel_top_btn.add(btn_cart);
+		panel_top_btn.add(btn_order);
 		btn_search.setBorderPainted(false);
 		btn_search.setContentAreaFilled(false);
 		btn_cart.setBorderPainted(false);
 		btn_cart.setContentAreaFilled(false);
-
+		btn_order.setBorderPainted(false);
+		btn_order.setContentAreaFilled(false);
+		
 		panel_menu.setLayout(new FlowLayout());
 		panel_menu.add(btn_home);
 		panel_menu.setBackground(Color.WHITE);
@@ -155,6 +159,7 @@ public class CategoryFrame extends JFrame implements ActionListener {
 		}
 		btn_home.addActionListener(this);
 		btn_search.addActionListener(this);
+		btn_order.addActionListener(this);
 	}
 
 	@Override
@@ -181,6 +186,9 @@ public class CategoryFrame extends JFrame implements ActionListener {
 				return; // 함수 강제 종료
 			}
 			new HomeFrame(name);
+			setVisible(false);
+		} else if(e.getSource() == btn_order) { // 주문 내역
+			new OrderFrame();
 			setVisible(false);
 		}
 	}

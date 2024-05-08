@@ -10,13 +10,13 @@ public class OrderDTO {
 	       
 	    }
 	    
-	    public OrderDTO(String orderadate, String name, String orderno,
+	    public OrderDTO(String orderadate, String name, String orderno, int itemno,
 	         String orderstatus) {
 	      super();
 	      this.orderadate = orderadate;
 	      this.name = name;
 	      this.orderno = orderno;
-	     // this.itemno = itemno;
+	      this.itemno = itemno;
 	      //this.sale = sale;
 	      this.orderstatus = orderstatus;
 	   }
@@ -25,8 +25,8 @@ public class OrderDTO {
 
 	   @Override
 	   public String toString() {
-	      String str = String.format("%s\n%s\n%s\n%s", 
-	            orderadate, name, orderno,  orderstatus);
+	      String str = String.format("%s번 제품\n%s\n%s\n%s\n%s", 
+	            itemno, orderadate, name, orderno,  orderstatus);
 	      
 	      return str;
 	   }

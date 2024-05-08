@@ -30,7 +30,7 @@ public class ItemDAO {
 	}
 	
 	public List<ItemDTO> selectAll() {
-		String sql = "select * from item";
+		String sql = "select * from item order by itemno asc";
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -67,7 +67,7 @@ public class ItemDAO {
 	}
 	
 	public List<ItemDTO> selectCategory(String kind) {
-		String sql = "select * from item where kind like ?";
+		String sql = "select * from item where kind like ? order by itemno asc";
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -103,7 +103,7 @@ public class ItemDAO {
 	}
 	
 	public List<ItemDTO> searchName(String name) {
-		String sql = "select * from item where name like ?";
+		String sql = "select * from item where name like ? order by itemno asc";
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;

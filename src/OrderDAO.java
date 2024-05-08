@@ -31,7 +31,7 @@ public class OrderDAO {
 		return conn;
 	}
 	public List<OrderDTO> searchAll() {
-		String sql = "select * from orders";
+		String sql = "select * from orders INNER JOIN item on item.itemno = orders.itemno order by orderadate desc";
 		List<OrderDTO> list = new ArrayList<OrderDTO>();
 
 		Connection conn = getConnection();
@@ -48,45 +48,7 @@ public class OrderDAO {
 				dto.setOrderno(rs.getString("orderno"));
 				dto.setItemno(rs.getInt("itemno"));
 				dto.setOrderstatus(rs.getString("orderstatus"));
-				list.add(dto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-	public List<OrderDTO> searchONum(String num) {
-		String sql = "SELECT orders.orderadate, item.name, orders.orderno, "
-				+ "orders.itemno, item.sale, orders.orderstatus " + "FROM orders "
-				+ "INNER JOIN item ON item.itemno = orders.itemno " + "WHERE orderno=?";
-		List<OrderDTO> list = new ArrayList<OrderDTO>();
-
-		Connection conn = getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, num);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				OrderDTO dto = new OrderDTO();
-				dto.setOrderadate(rs.getString("orderadate"));
 				dto.setName(rs.getString("name"));
-				dto.setOrderno(rs.getString("orderno"));
-				dto.setOrderstatus(rs.getString("orderstatus"));
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -103,6 +65,7 @@ public class OrderDAO {
 				e.printStackTrace();
 			}
 		}
+
 		return list;
 	}
 }

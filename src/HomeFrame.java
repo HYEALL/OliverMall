@@ -51,7 +51,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 
 	public HomeFrame() {
 		// Frame 기본설정
-		setSize(400, 700);
+		setSize(430, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.read();
@@ -62,7 +62,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	}
 	public HomeFrame(String name) {
 		// Frame 기본설정
-		setSize(400, 700);
+		setSize(430, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
 		str = controller.searchName(name);
@@ -168,6 +168,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		}
 		btn_home.addActionListener(this);
 		btn_search.addActionListener(this);
+		btn_order.addActionListener(this);
 	}
 
 	@Override
@@ -187,13 +188,16 @@ public class HomeFrame extends JFrame implements ActionListener {
 		} else if(e.getSource() == btn_home) { // 홈
 			new HomeFrame();
 			setVisible(false);
-		} else if(e.getSource() == btn_search) {
+		} else if(e.getSource() == btn_search) { // 검색
 			String name = tf_search.getText();
 			if (name.equals("")) {
 				JOptionPane.showMessageDialog(this, "검색어를 입력하세요");
-				return; // 함수 강제 종료
+				return;
 			}
 			new HomeFrame(name);
+			setVisible(false);
+		} else if(e.getSource() == btn_order) { // 주문 내역
+			new OrderFrame();
 			setVisible(false);
 		}
 	}
