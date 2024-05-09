@@ -1,5 +1,5 @@
 package service;
 
 public interface Order {
-	public String readAll();
+	public String readId(String id);
 }

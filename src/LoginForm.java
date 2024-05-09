@@ -170,7 +170,7 @@ public class LoginForm extends JFrame implements ActionListener {
 			tf_id.setText("");
 			tf_pw.setText("");
 			if (result.equals("환영합니다")) {
-				new HomeFrame();
+				new HomeFrame(99, dto.getId());
 				setVisible(false);
 			}
 		} else if (e.getSource() == bt_join) {

@@ -33,18 +33,18 @@ public class OrderDAO {
 		}
 		return conn;
 	}
-	public List<OrderDTO> searchAll() {
-		String sql = "select * from orders INNER JOIN item on item.itemno = orders.itemno order by orderadate desc";
+	public List<OrderDTO> searchId(String id) {
+		String sql = "select * from orders INNER JOIN item on item.itemno = orders.itemno where id=? order by orderadate desc";
 		List<OrderDTO> list = new ArrayList<OrderDTO>();
-
+		
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				OrderDTO dto = new OrderDTO();
 				dto.setOrderadate(rs.getString("orderadate"));;

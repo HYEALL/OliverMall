@@ -60,13 +60,13 @@ public class OrderFrame extends JFrame{
 	JPanel panel_item_content = new JPanel();
 	JPanel panel_item_image = new JPanel();
 	String str = "";
-	public OrderFrame() {
+	public OrderFrame(String id) {
 
 		// Frame 기본 설정
 		setSize(450, 700);
 		setTitle("OrderForm");
 		setLocation(400, 200);
-		str = order.readAll();
+		str = order.readId(id);
 		init();
 		start();
 		setIconImage(imageIcon_T.getImage());
@@ -106,7 +106,12 @@ public class OrderFrame extends JFrame{
 		panel_item_content.setBackground(Color.white);
 		//textArea.setText(str);
 		//panel_center.add("Center", scrollPane);
-		panel_item_image.setLayout(new GridLayout(size, 1, 0, 10));
+		if(size<6) {
+			panel_item_image.setLayout(new GridLayout(6, 1, 0, 10));
+		} else {
+			panel_item_image.setLayout(new GridLayout(size, 1, 0, 10));
+		}
+		
 		panel_item_image.setBackground(Color.WHITE);
 		
 		
@@ -125,13 +130,18 @@ public class OrderFrame extends JFrame{
 				}
 			}
 			for (int i = 0; i < size; i++) {
-				item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));;
+				item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));
 				item_btns[i].setBorderPainted(false);
 				item_btns[i].setContentAreaFilled(false);
+				item_btns[i].setFocusPainted(false);
 				panel_item_image.add(item_btns[i]);
 			}
-	
-			panel_item_content.setLayout(new GridLayout(size, 1, 0, 10));
+			if(size < 6) {
+				panel_item_content.setLayout(new GridLayout(6, 1, 0, 10));
+			} else {
+				panel_item_content.setLayout(new GridLayout(size, 1, 0, 10));
+			}
+			
 			for (int i = 0; i < size; i++) {
 				item_textAreas[i] = new JTextArea(item_strs[i]);
 				item_textAreas[i].setEditable(false);
@@ -142,7 +152,7 @@ public class OrderFrame extends JFrame{
 			}
 		} else {
 
-			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
+			JOptionPane.showMessageDialog(this, "주문내역이 없습니다.");
 		}
 
 		panel_info.setBackground(Color.white);

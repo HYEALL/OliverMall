@@ -19,15 +19,17 @@ CREATE TABLE item (
     -- 상품 카테고리
     kind CHAR(1)                       --  상품 종류(1: 스킨케어, 2:포인트메이크업, 3: 베이스메이크업, 4: 선케어)
 );
-SELECT * FROM item WHERE itemno=2;
+--SELECT * FROM item WHERE itemno=2;
 -- order(주문) 테이블
 create table orders (
     orderno varchar2(20) not null,      -- 주문번호
     orderadate varchar2(20) not null,  -- 주문일자
     orderstatus varchar2(20),   -- 주문상태
     itemno NUMBER not null,
+    id varchar2(20) not null,
     primary key (orderno),
-    constraint fk_item FOREIGN KEY(itemno) REFERENCES item(itemno)
+    constraint fk_item FOREIGN KEY(itemno) REFERENCES item(itemno),
+    constraint fk_id FOREIGN KEY(id) REFERENCES users(id)
 );
 -- 장바구니
 create table cart (
@@ -48,16 +50,16 @@ create table review (
     constraint fk_reviewitem FOREIGN KEY(itemno) REFERENCES item(itemno),
     constraint fk_reviewuser FOREIGN KEY(id) REFERENCES users(id)
 );
-
+create table admin (
+  adminid varchar2(20) primary key,
+  password varchar2(20) not null
+);
 --insert into users (name, id, pw) values ('가나다', 'abc', 1234);
 --insert into review values (1, '좋아요', '아주 좋아요', 1, 'abc', '2024-05-01');
 --insert into review values (2, '좋아요 3번상품', '아주 좋아요 3번상품', 3, 'abc', '2024-05-01');
 --select * from review where itemno= 3;
 --drop table review;
-create table admin (
-  adminid varchar2(20) primary key,
-  password varchar2(20) not null
-);
+
 
 --select * from users where id='jangjang';
 --delete orders where orderno = 'Q678907';
@@ -69,6 +71,7 @@ create table admin (
 --select * from item where kind= '1';
 --drop table orders purge;
 --select * from orders;
+--select * from orders INNER JOIN item on item.itemno = orders.itemno where id='test2' order by orderadate desc ;
 --select * from item;
 --select * from tab;
 
@@ -86,6 +89,8 @@ create table admin (
 
 
 ---
+insert into users values ('테스트', 'test', '1234', '010-1234-5678', '남', '1999-08-15', 'test@naver.com');
+insert into users values ('테스트2', 'test2', '1234', '010-1234-5679', '여', '2000-04-15', 'test2@naver.com');
 
 insert into item values (1, '식물나라 수분 선크림', 10000, 9500, 1000, 500, 4);
 insert into item values (2, '닥터지 수분 수딩 크림', 11000, 9000, 1000, 2000, 1);
@@ -99,11 +104,14 @@ INSERT INTO item VALUES(9,'딘토 블러글로이 립 틴트', 20000, 12600, 7400, 37, 2);
 INSERT INTO item VALUES(10, '브링그린 세럼마스크',3000,1500,1500, 50, 1);
 INSERT INTO item VALUES(11, '클리오 수퍼프루프 라이너', 18000, 12600, 5400, 30,2);
 
-INSERT INTO orders VALUES ('Y230998','2024-01-09', '주문완료', 1); 
-INSERT INTO orders VALUES ('Y567889', '2024-02-22', '주문완료',3); 
-INSERT INTO orders VALUES ('Y267889', '2024-04-22', '주문완료',6); 
-INSERT INTO orders VALUES ('Z987547', '2024-05-06', '배송중',4);
-INSERT INTO orders VALUES ('Q678904', '2024-05-05', '배송중',5);
-INSERT INTO orders VALUES ('Q678907', '2024-05-05', '배송중',10);
-select * from users;
+INSERT INTO orders VALUES ('Y230998','2024-01-09', '구매확정', 1, 'test'); 
+INSERT INTO orders VALUES ('Y567889', '2024-02-22', '구매확정',3, 'test'); 
+INSERT INTO orders VALUES ('Y267889', '2024-04-22', '구매확정',6, 'test'); 
+INSERT INTO orders VALUES ('Z987547', '2024-05-06', '배송중',4, 'test');
+INSERT INTO orders VALUES ('Q678904', '2024-05-05', '배송완료',5, 'test');
+INSERT INTO orders VALUES ('Q678907', '2024-05-05', '배송중',10, 'test');
+INSERT INTO orders VALUES ('Q678917', '2024-05-09', '배송중',7, 'test2');
+INSERT INTO orders VALUES ('Y254900', '2024-01-19', '구매확정',4, 'test2');
+INSERT INTO orders VALUES ('Z300912', '2024-02-14', '구매확정',11, 'test2');
+--select * from users;
 commit;

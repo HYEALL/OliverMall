@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import controller.ItemController;
+import dto.UsersDTO;
 import service.Item;
 
 public class HomeFrame extends JFrame implements ActionListener {
@@ -50,16 +51,17 @@ public class HomeFrame extends JFrame implements ActionListener {
 	String[] categoryStr = { "Skin", "Point", "Base", "Sun" };
 	JTextField tf_search = new JTextField();
 
-
 	Item controller = new ItemController();
-	
+
 	String str = "";
 	int category;
+	String userid;
 	JButton[] item_btns;
 	String[] item_nos;
+
 	public HomeFrame() {
 		// Frame 기본설정
-		
+
 		setSize(450, 700);
 		setTitle("올리버몰");
 		setLocation(400, 200);
@@ -68,9 +70,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 		start();
 		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
-		
+
 	}
-	
+
 	public HomeFrame(int c) {
 		category = c;
 		// Frame 기본설정
@@ -82,8 +84,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 		start();
 		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
-		
+
 	}
+
 	public HomeFrame(String name) {
 		// Frame 기본설정
 		setSize(450, 700);
@@ -94,13 +97,26 @@ public class HomeFrame extends JFrame implements ActionListener {
 		start();
 		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
-		
+
 	}
 
+	public HomeFrame(int c, String id) {
+		userid = id;
+		// Frame 기본설정
+		setSize(450, 700);
+		setTitle("올리버몰");
+		setLocation(400, 200);
+		str = controller.read();
+		init();
+		start();
+		setIconImage(imageIcon_T.getImage());
+		setVisible(true);
+
+	}
 
 	private void init() {
 		String[] item_strs = str.split("\t");
-		if (str.equals("")) 
+		if (str.equals(""))
 			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
 		int size = item_strs.length;
 		item_nos = new String[size];
@@ -111,7 +127,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 
 		container.add(scrollPane);
 		scrollPane.setViewportView(panel_all);
-		// 시작 스크롤 위치 변경, 실패 
+		// 시작 스크롤 위치 변경, 실패
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		panel_all.setLayout(new BorderLayout());
 		panel_all.setBackground(Color.WHITE);
@@ -157,81 +173,78 @@ public class HomeFrame extends JFrame implements ActionListener {
 		panel_item.add("West", panel_item_image);
 		panel_item.add("Center", panel_item_content);
 		panel_item_content.setBackground(Color.WHITE);
-		
-		panel_item_image.setLayout(new GridLayout(size+2, 1, 0, 10));
-		panel_item_image.setBackground(Color.WHITE);
-		
 
-		for(int i=0; i< size; i++) {
+		panel_item_image.setLayout(new GridLayout(size + 2, 1, 0, 10));
+		panel_item_image.setBackground(Color.WHITE);
+
+		for (int i = 0; i < size; i++) {
 			if (item_strs[i].length() >= 5) {
 				item_nos[i] = item_strs[i].substring(3, 5);
 			}
 		}
 		for (int i = 0; i < size; i++) {
-			item_btns[i] = new JButton(new ImageIcon("img/"+(item_nos[i])+".png"));
+			item_btns[i] = new JButton(new ImageIcon("img/" + (item_nos[i]) + ".png"));
 			item_btns[i].setBorderPainted(false);
 			item_btns[i].setContentAreaFilled(false);
 			item_btns[i].addActionListener(this);
 			panel_item_image.add(item_btns[i]);
 		}
 
-		panel_item_content.setLayout(new GridLayout(size+2, 1, 0, 10));
+		panel_item_content.setLayout(new GridLayout(size + 2, 1, 0, 10));
 		for (int i = 0; i < size; i++) {
 			item_textAreas[i] = new JTextArea(item_strs[i]);
 			item_textAreas[i].setEditable(false);
 			item_textAreas[i].setFont(new Font("HY견고딕 보통", Font.BOLD, 15));
 			item_textAreas[i].setBorder(null);
 			panel_item_content.add(item_textAreas[i]);
-			
+
 		}
-		Runnable runnable = new Runnable() {         
-	        @Override
-	        public void run() {
-	           scrollPane.getVerticalScrollBar().setValue(0);
-	        }
-	     };
-	     
-	    SwingUtilities.invokeLater(runnable);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				scrollPane.getVerticalScrollBar().setValue(0);
+			}
+		};
+
+		SwingUtilities.invokeLater(runnable);
 	}
 
-     
 	private void start() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		for(int i=0; i<4; i++) {
+		for (int i = 0; i < 4; i++) {
 			categoryButtons[i].addActionListener(this);
 		}
 		btn_home.addActionListener(this);
 		btn_search.addActionListener(this);
 		btn_order.addActionListener(this);
 		logo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            	new HomeFrame();
-            	setVisible(false);
-            }
-        });
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new HomeFrame();
+				setVisible(false);
+			}
+		});
 
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == categoryButtons[0]) { // 스킨 케어
+		if (e.getSource() == categoryButtons[0]) { // 스킨 케어
 			new HomeFrame(1);
 			setVisible(false);
-		} else if(e.getSource() == categoryButtons[1]) { // 포인트 메이크업
+		} else if (e.getSource() == categoryButtons[1]) { // 포인트 메이크업
 			new HomeFrame(2);
 			setVisible(false);
-		} else if(e.getSource() == categoryButtons[2]) { // 베이스 메이크업
+		} else if (e.getSource() == categoryButtons[2]) { // 베이스 메이크업
 			new HomeFrame(3);
 			setVisible(false);
-		} else if(e.getSource() == categoryButtons[3]) { // 선케어
+		} else if (e.getSource() == categoryButtons[3]) { // 선케어
 			new HomeFrame(4);
 			setVisible(false);
-		} else if(e.getSource() == btn_home) { // 홈
+		} else if (e.getSource() == btn_home) { // 홈
 			new HomeFrame();
 			setVisible(false);
-		} else if(e.getSource() == btn_search) { // 검색
+		} else if (e.getSource() == btn_search) { // 검색
 			String name = tf_search.getText();
 			if (name.equals("")) {
 				JOptionPane.showMessageDialog(this, "검색어를 입력하세요");
@@ -239,17 +252,18 @@ public class HomeFrame extends JFrame implements ActionListener {
 			}
 			new HomeFrame(name);
 			setVisible(false);
-		} else if(e.getSource() == btn_order) { // 주문 내역
-			new OrderFrame();
+		} else if (e.getSource() == btn_order) { // 주문 내역
+			new OrderFrame(userid);
 			setVisible(false);
-		} for(int i=0; i<item_btns.length ; i++) {
-			if(e.getSource() == item_btns[i]) {// 상품별 클릭
-				
+		}
+		for (int i = 0; i < item_btns.length; i++) {
+			if (e.getSource() == item_btns[i]) {// 상품별 클릭
+
 				new ItemFrame(Integer.parseInt(item_nos[i]));
 			}
-			
+
 		}
-			
+
 	}
 
 }

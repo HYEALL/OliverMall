@@ -8,6 +8,7 @@ import javax.swing.*;
 import service.Item;
 import controller.ItemController;
 import dto.ItemDTO;
+import dto.UsersDTO;
 
 public class ItemFrame extends JFrame implements ActionListener {
 	Item controller = new ItemController();
@@ -195,7 +196,7 @@ public class ItemFrame extends JFrame implements ActionListener {
 		} else if (e.getSource() == btn_back) { // 뒤로가기 이벤트처리
 			 dispose();
 		} else if (e.getSource() == btn_order) { // 주문내역
-			new OrderFrame();
+			//new OrderFrame();
 			setVisible(false);
 		} else if (e.getSource() == buttonCart) { // 상품 장바구니로 보내기 이벤트처리
 			JOptionPane.showMessageDialog(this, "장바구니에 추가되었습니다.");
