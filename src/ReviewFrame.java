@@ -28,6 +28,7 @@ public class ReviewFrame extends JFrame implements ActionListener{
 	JLabel logo = new JLabel(new ImageIcon("img/logo.png"));
 	JButton btn_search = new JButton(new ImageIcon("img/search.png"));
 	JButton btn_cart = new JButton(new ImageIcon("img/cart.png"));
+	ImageIcon imageIcon_T = new ImageIcon("img/로고.png");
 	JPanel panel_all = new JPanel();
 	JScrollPane scrollPane = new JScrollPane();
 	JPanel panel_top = new JPanel();
@@ -47,6 +48,7 @@ public class ReviewFrame extends JFrame implements ActionListener{
 		str = controller.searchItemNo(3);
 		init();
 		start();
+		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
 	}
 	private void init() {

@@ -36,7 +36,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	JButton btn_order = new JButton(new ImageIcon("img/order.png"));
 	JPanel panel_all = new JPanel();
 	JScrollPane scrollPane = new JScrollPane();
-
+	ImageIcon imageIcon_T = new ImageIcon("img/로고.png");
 	JPanel panel_top = new JPanel();
 	JPanel panel_top_title = new JPanel();
 	JPanel panel_top_btn = new JPanel();
@@ -56,6 +56,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 	String str = "";
 	int category;
 	JButton[] item_btns;
+	String[] item_nos;
 	public HomeFrame() {
 		// Frame 기본설정
 		
@@ -65,6 +66,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		str = controller.read();
 		init();
 		start();
+		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
 		
 	}
@@ -78,6 +80,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		str = controller.readCategory(Integer.toString(category));
 		init();
 		start();
+		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
 		
 	}
@@ -89,6 +92,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		str = controller.searchName(name);
 		init();
 		start();
+		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
 		
 	}
@@ -99,7 +103,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		if (str.equals("")) 
 			JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
 		int size = item_strs.length;
-		String[] item_nos = new String[size];
+		item_nos = new String[size];
 		JTextArea[] item_textAreas = new JTextArea[size];
 		JScrollPane[] item_scrollPane = new JScrollPane[size];
 		item_btns = new JButton[size];
@@ -240,7 +244,8 @@ public class HomeFrame extends JFrame implements ActionListener {
 			setVisible(false);
 		} for(int i=0; i<item_btns.length ; i++) {
 			if(e.getSource() == item_btns[i]) {// 상품별 클릭
-				new ItemFrame(i+1);
+				
+				new ItemFrame(Integer.parseInt(item_nos[i]));
 			}
 			
 		}

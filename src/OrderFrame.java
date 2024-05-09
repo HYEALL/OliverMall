@@ -50,7 +50,7 @@ public class OrderFrame extends JFrame{
 	JPanel panel_lb = new JPanel();
 	ImageIcon imageIcon = new ImageIcon("img/test.png");
 	JLabel lb = new JLabel(new ImageIcon("img/test.png"));
-
+	ImageIcon imageIcon_T = new ImageIcon("img/로고.png");
 	// panel_info
 	JPanel panel_info = new JPanel();
 
@@ -69,6 +69,7 @@ public class OrderFrame extends JFrame{
 		str = order.readAll();
 		init();
 		start();
+		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
 	}
 

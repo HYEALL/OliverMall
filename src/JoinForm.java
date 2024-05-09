@@ -1,5 +1,4 @@
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -12,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +29,10 @@ public class JoinForm extends JFrame implements ActionListener {
 	Font font = new Font("HY견고딕 보통", Font.BOLD, 20);
 	Font font1 = new Font("맑은 고딕", Font.BOLD, 15);
 	Font font2 = new Font("맑은 고딕", Font.BOLD, 15);
+	
+	// 타이틀 바의 이미지를 가지는 객체
+	ImageIcon imageIcon_T = new ImageIcon("img/로고.png");
+
 	// JLabel
 	JLabel lb_title = new JLabel("회원가입");
 	JLabel lb_title2 = new JLabel(" 정보를 입력해주세요");
@@ -81,6 +85,7 @@ public class JoinForm extends JFrame implements ActionListener {
 	public JoinForm() {
 		setSize(450, 700);
 		setTitle("올리버몰");
+		setIconImage(imageIcon_T.getImage());
 		setLocation(400, 200);
 		init();
 		start();
@@ -95,7 +100,7 @@ public class JoinForm extends JFrame implements ActionListener {
 
 		// title
 		p_North.add(lb_title);
-		p_North.setBackground(new Color(213, 232, 145));
+		p_North.setBackground(new Color(167, 204, 10));
 		lb_title.setFont(font);
 		// Center_panel
 		p_Center.setLayout(new GridLayout(7, 1, 0, 2));
@@ -180,8 +185,8 @@ public class JoinForm extends JFrame implements ActionListener {
 		rbt_girl.setBackground(Color.WHITE);
 
 		// button 색
-		bt_Cancel.setBackground(new Color(213, 232, 145));
-		bt_join.setBackground(new Color(213, 232, 145));
+		bt_Cancel.setBackground(new Color(167, 204, 10));
+		bt_join.setBackground(new Color(167, 204, 10));
 		bt_Cancel.setForeground(Color.BLACK);
 		bt_join.setForeground(Color.BLACK);
 		bt_Cancel.setFont(font2);
@@ -238,7 +243,7 @@ public class JoinForm extends JFrame implements ActionListener {
 			dto.setEmail(email);
 			String result = join.join(dto);
 			JOptionPane.showMessageDialog(this, result);
-			if(result.equals("아이디가 생성되었습니다.")) {
+			if (result.equals("아이디가 생성되었습니다.")) {
 				new LoginForm();
 				setVisible(false);
 			} else {
