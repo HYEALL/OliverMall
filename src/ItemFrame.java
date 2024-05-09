@@ -136,17 +136,26 @@ public class ItemFrame extends JFrame implements ActionListener {
 		} else if(kind.equals("4")) {
 			category = "선케어 ";
 		}
-		textArea.setText("\n                  "+category+"제품\n\n                 "
-				+ "정가: "+dto.getCost()+"원"+"\n                 "+dto.getDiscount()+"원 할인중");
+		String str = dto.getContent();
+		String[] item_strs = str.split("\\\\n");
+		// str 나누기 
+		str = "  ";
+		
+		for(int i=0; i<item_strs.length; i++) {
+			str += item_strs[i]+"\n  ";
+		}
+		
+		textArea.setText("\n\t      "+category+"제품\n\n"
+				+ "  정가: "+dto.getCost()+"원,  "+dto.getDiscount()+"원 할인중\n\n"+str);
 		p_label.add("Center", textArea);
 		p_label.add("South", l_sale); // 할인가 추가
 		l_sale.setText("구매가: "+dto.getSale()+"원");
-		textArea.setFont(new Font("굴림", Font.BOLD,23));
+		textArea.setFont(new Font("나눔고딕", Font.BOLD,19));
 		textArea.setEditable(false);
-		l_name.setFont(new Font("굴림", Font.BOLD,25));
-		l_profit.setFont(new Font("굴림", Font.BOLD, 20));
-		l_cost.setFont(new Font("굴림", Font.BOLD, 20));
-		l_sale.setFont(new Font("굴림", Font.BOLD, 30));
+		l_name.setFont(new Font("나눔고딕", Font.BOLD,23));
+		l_profit.setFont(new Font("나눔고딕", Font.BOLD, 20));
+		l_cost.setFont(new Font("나눔고딕", Font.BOLD, 20));
+		l_sale.setFont(new Font("나눔고딕", Font.BOLD, 30));
 		l_name.setHorizontalAlignment(JLabel.CENTER);
 		l_cost.setHorizontalAlignment(JLabel.CENTER);
 		l_profit.setHorizontalAlignment(JLabel.CENTER);

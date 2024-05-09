@@ -162,7 +162,7 @@ public class ItemDAO {
 				dto.setProfit(rs.getInt("profit"));
 				dto.setDiscount(rs.getInt("discount"));
 				dto.setKind(rs.getString("kind"));
-				
+				dto.setContent(rs.getString("content"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

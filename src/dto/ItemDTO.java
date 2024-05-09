@@ -8,12 +8,13 @@ public class ItemDTO {
 	private int profit; // 이익
 	private int discount; // 할인
 	private String kind; // 상품 종류(1: 스킨케어, 2:포인트메이크업, 3: 베이스메이크업, 4: 선케어)
+	private String content; // 상품 내용
 	
 	public ItemDTO() {
 		
 	}
 	
-	public ItemDTO(int itemno, String name, int cost, int sale, int profit, int discount, String kind) {
+	public ItemDTO(int itemno, String name, int cost, int sale, int profit, int discount, String kind, String content) {
 		super();
 		this.itemno = itemno;
 		this.name = name;
@@ -22,6 +23,7 @@ public class ItemDTO {
 		this.profit = profit;
 		this.discount = discount;
 		this.kind = kind;
+		this.content = content;
 	}
 	
 	
@@ -34,6 +36,15 @@ public class ItemDTO {
 			str = String.format("\n\n\n%s번 제품\n%s\n정가: %s원\n판매가: %s원", itemno, name, cost, sale);
 		}
 		return str;
+	}
+	
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getItemno() {
