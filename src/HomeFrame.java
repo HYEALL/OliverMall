@@ -259,7 +259,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		for (int i = 0; i < item_btns.length; i++) {
 			if (e.getSource() == item_btns[i]) {// 상품별 클릭
 
-				new ItemFrame(Integer.parseInt(item_nos[i]));
+				new ItemFrame(Integer.parseInt(item_nos[i]), userid);
 			}
 
 		}

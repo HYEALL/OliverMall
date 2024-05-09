@@ -58,7 +58,7 @@ public class ItemFrame extends JFrame implements ActionListener {
 	
 	private ItemFrame itemFrame;
     private Item selectedItem;
-
+    String userid;
 	public ItemFrame(int itemno) {
 		setSize(450, 700);
 		setTitle("올리버몰");
@@ -69,7 +69,17 @@ public class ItemFrame extends JFrame implements ActionListener {
 		setIconImage(imageIcon_T.getImage());
 		setVisible(true);
 	}
-
+	public ItemFrame(int itemno, String id) {
+		userid = id;
+		setSize(450, 700);
+		setTitle("올리버몰");
+		setLocation(400, 200);
+		dto = controller.searchItemNo(itemno);
+		init();
+		start();
+		setIconImage(imageIcon_T.getImage());
+		setVisible(true);
+	}
 	private void init() {
 		container.setLayout(new BorderLayout());
 		container.add("North", p_north);
@@ -196,7 +206,7 @@ public class ItemFrame extends JFrame implements ActionListener {
 		} else if (e.getSource() == btn_back) { // 뒤로가기 이벤트처리
 			 dispose();
 		} else if (e.getSource() == btn_order) { // 주문내역
-			//new OrderFrame();
+			new OrderFrame(userid);
 			setVisible(false);
 		} else if (e.getSource() == buttonCart) { // 상품 장바구니로 보내기 이벤트처리
 			JOptionPane.showMessageDialog(this, "장바구니에 추가되었습니다.");
