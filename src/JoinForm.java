@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -65,7 +66,7 @@ public class JoinForm extends JFrame implements ActionListener {
 	// JTextField
 	JTextField tf_name = new JTextField(15);
 	JTextField tf_id = new JTextField(15);
-	JTextField tf_pw = new JTextField(15);
+	JPasswordField tf_pw = new JPasswordField(15);
 	JTextField tf_tel = new JTextField(15);
 	JTextField tf_email1 = new JTextField(30);
 	JTextField tf_birthdate = new JTextField(15);
